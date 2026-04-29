@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}
+Enrollment
+{% endblock title %}
+
+{% block head %}
+<style>
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.no-spinner {
+    -moz-appearance: textfield;
+}
+</style>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+                    <h1 class="text-center mb-4">Join the Fitness Revolution</h1>
+
+                     {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+
+                    <form action="/enroll" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="fullname" placeholder="Enter your Full Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" value="{{user.email}}" name="email" placeholder="Your Email" readonly required>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" id='gender' name="gender" required>
+                                <option value="" disabled selected>Select Gender</option>   
+                                <option value="Male">Male</option>  
+                                <option value="Female">Female</option>  
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                                <input type="number" class="form-control no-spinner" value="{{user.username}}" name="phonenumber" placeholder="Phone Number" readonly required>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="dob" required>
+                            <label>Date of Birth</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <select class="form-select" id='member' name="member" required>
+                                <option value="" disabled selected>Select Membership Plan</option>   
+                                {% for p in Memberships %}
+                                <option value="{{p.plan}} - ₹{{p.price}}">{{p.plan}} - ₹{{p.price}}</option>
+                                {% comment %} <option value="{{p.id}}">{{p.plan}} - ₹{{p.price}}</option> {% endcomment %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" id='trainer' name="trainer" required>
+                                <option value="" disabled selected>Select Trainer</option>   
+                                {% for t in Trainers %}
+                                <option value="{{t.name}}">{{t.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea class="form-control" name="address" rows="3" placeholder="Enter your Address" required></textarea>
+                        </div>
+                        
+                        
+                        <div class="d-grid">
+                            <button class="btn btn-warning" type="submit">Enroll Now</button>
+                        </div>
+                    
+        </div>
+    </div>
+</div>
+{% endblock head %}

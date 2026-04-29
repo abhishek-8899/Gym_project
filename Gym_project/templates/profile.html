@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block head %}
+
+<style>
+
+/* ===== BODY BACKGROUND ===== */
+body {
+    background-color: #000 !important;
+    color: white;
+}
+
+/* ===== MEMBERSHIP CARD ===== */
+.profile-card {
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.15);
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== TEXT ===== */
+.label {
+    font-weight: bold;
+    color: #ffc107;
+}
+
+.value {
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+h1, h3, h4 {
+    color: white;
+}
+
+/* ===== ATTENDANCE SECTION ===== */
+.attendance-section {
+    margin-top: 60px;
+}
+
+/* ===== TABLE ===== */
+.glass-table {
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 15px;
+    overflow: hidden;
+    color: white;
+    box-shadow: 0 0 25px rgba(255, 193, 7, 0.15);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+/* HEADER */
+.glass-table th {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 12px;
+}
+
+/* CELLS */
+.glass-table td {
+    background: transparent !important;
+    color: #ddd;
+    text-align: center;
+    padding: 12px;
+    border-color: rgba(255,255,255,0.08);
+}
+
+/* HOVER */
+.glass-table tbody tr:hover {
+    background: rgba(255, 193, 7, 0.08);
+    transition: 0.3s;
+}
+
+/* REMOVE BOOTSTRAP WHITE */
+.table {
+    background-color: transparent !important;
+}
+
+/* TITLE */
+.att-title {
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255,193,7,0.6);
+    font-weight: bold;
+}
+
+/* RESPONSIVE */
+.table-responsive {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+</style>
+
+<div class="container mt-4">
+
+```
+<h1 class="text-center mb-4 text-warning">My Membership</h1>
+
+<h4 class="text-center mb-4">
+    Welcome,
+    {% if enrollments %}
+        {{ enrollments.0.fullname }}
+    {% else %}
+        {{ request.user.username }}
+    {% endif %}
+    👋
+</h4>
+
+{% if enrollments %}
+    {% for e in enrollments %}
+    <div class="profile-card">
+
+        <h3 class="text-center mb-3">{{ e.fullname }}</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="value"><span class="label">📧 Email:</span> {{ e.email }}</div>
+                <div class="value"><span class="label">📱 Phone:</span> {{ e.phonenumber }}</div>
+                <div class="value"><span class="label">⚧ Gender:</span> {{ e.gender }}</div>
+                <div class="value"><span class="label">🎂 DOB:</span> {{ e.dob }}</div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="value"><span class="label">🏋 Plan:</span> {{ e.selected_plan }}</div>
+                <div class="value"><span class="label">👨‍🏫 Trainer:</span> {{ e.selected_trainer }}</div>
+
+                <div class="value">
+                    <span class="label">💰 Amount Paid:</span>
+                    {% if e.amount_paid %}
+                        ₹{{ e.amount_paid }}
+                    {% else %}
+                        <span class="text-warning">Not Paid</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <hr style="border-color: rgba(255,255,255,0.1);">
+
+        <div class="value"><span class="label">🏠 Address:</span> {{ e.address }}</div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="value">
+                    <span class="label">📅 Joined:</span> {{ e.timestamp }}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="value">
+                    <span class="label">⏳ Due Date:</span>
+                    {% if e.duedate %}
+                        {{ e.duedate }}
+                    {% else %}
+                        <span class="text-warning">Not Set</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-info text-center">
+        No enrollment found.
+    </div>
+{% endif %}
+```
+
+</div>
+
+{% endblock head %}
+
+{% block body %}
+
+<div class="container attendance-section">
+
+```
+<h2 class="text-center mb-4 att-title">📅 My Attendance</h2>
+
+{% if attendences %}
+
+<div class="table-responsive">
+    <table class="table glass-table table-bordered">
+
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Workout</th>
+                <th>Trainer</th>
+                <th>Login</th>
+                <th>Logout</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for a in attendences %}
+            <tr>
+                <td>{{ a.selectdate }}</td>
+                <td>{{ a.selectworkout }}</td>
+                <td>{{ a.trainedby }}</td>
+                <td>{{ a.login }}</td>
+                <td>{{ a.logout }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+{% else %}
+    <div class="alert text-center" style="background: rgba(255,193,7,0.1); color:#ffc107;">
+        No attendance records found.
+    </div>
+{% endif %}
+
+<br><br>
+```
+
+</div>
+
+{% endblock body %}

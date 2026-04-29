@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}
+Attendance
+{% endblock title %}
+
+{% block head %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <h1 class="text-center mb-4 text-warning">Mark Your Attendance 💪</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form action="/attendence" method="post">
+                {% csrf_token %}
+
+                <!-- Phone (Prefilled) -->
+                <div class="mb-3">
+                    <input type="number" class="form-control" 
+                           value="{{ user.username }}" 
+                           name="phonenumber" readonly required>
+                </div>
+
+                <!-- Trainer Dropdown -->
+                <div class="mb-3">
+                    <select class="form-select" name="trainer" required>
+                        <option value="" disabled selected>Select Trainer</option>
+                        {% for t in Trainers %}
+                            <option value="{{ t.name }}">{{ t.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Workout Type -->
+                <div class="mb-3">
+                    <select class="form-select" name="workout" required>
+                        <option value="" disabled selected>Select Workout</option>
+                        <option value="Biceps">Biceps</option>
+                        <option value="Triceps">Triceps</option>
+                        <option value="Chest">Chest</option>
+                        <option value="Back">Back</option>
+                        <option value="Shoulders">Shoulders</option>
+                        <option value="Legs">Legs</option>
+                        <option value="Cardio">Cardio</option>
+                        <option value="Abs">Abs</option>
+                        <option value="Full Body">Full Body</option>
+                    </select>
+                </div>
+
+                <!-- Login Time -->
+                <div class="mb-3">
+                    <label class="form-label">Login Time</label>
+                    <input type="time" class="form-control" name="login" required>
+                </div>
+
+                <!-- Logout Time -->
+                <div class="mb-3">
+                    <label class="form-label">Logout Time</label>
+                    <input type="time" class="form-control" name="logout" required>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-grid">
+                    <button class="btn btn-warning" type="submit">
+                        Submit Attendance 🚀
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock head %}

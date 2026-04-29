@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}
+Gallery
+{% endblock title %}
+
+{% block body %}
+
+<style>
+/* Background */
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* Card */
+.gallery-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.gallery-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image bigger */
+.gallery-img {
+    width: 100%;
+    height: 300px;   /* 🔥 bigger image */
+    object-fit: cover;
+}
+
+/* Content */
+.gallery-content {
+    padding: 15px;
+    color: white;
+}
+
+.gallery-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.gallery-time {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Heading */
+h1 {
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+}
+</style>
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">🏋️ Gym Gallery</h1>
+
+    <div class="row">
+
+        {% for img in images %}
+        <div class="col-md-6 col-lg-4 mb-4">  <!-- 🔥 better spacing -->
+
+            <div class="gallery-card">
+
+                <img src="{{ img.image.url }}" class="gallery-img" alt="gallery image">
+
+                <div class="gallery-content">
+                    <div class="gallery-title">{{ img.title }}</div>
+                    <div class="gallery-time">
+                        {{ img.timestamp|date:"d M Y, h:i A" }}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock body %}
