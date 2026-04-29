@@ -10,7 +10,7 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="static/assets/img/msc1.png" rel="icon">
+  <link href="static/assets/img/gymo.png" rel="icon">
   <link href="static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -44,7 +44,7 @@
 
       <a href="\" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-         {% comment %} <img src="static/assets/img/logo.png" alt="">  {% endcomment %}
+          <img src="static/assets/img/gymo.png" alt=""> 
         <h1 class="sitename">Vishal's Fitness Gym</h1>
         <span>.</span>
       </a>
@@ -67,8 +67,11 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
-      <a class="btn-getstarted" href="/signup">SignIn</a>
+      {% if not request.user.is_authenticated  %}
+      <a class="btn-getstarted" href="/signup">SignUp</a>
+      {% else %}
+      <a class="btn-getstarted" href="/logout">Logout</a>
+      {% endif %}
 
     </div>
   </header>
@@ -92,31 +95,31 @@
         <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
           <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
             <div class="icon-box">
-              <i class="bi bi-binoculars"></i>
+              <i class="bi bi-hand-index-thumb"></i>
               <h3><a href="">Biceps|Triceps</a></h3>
             </div>
           </div>
           <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="400">
             <div class="icon-box">
-              <i class="bi bi-bullseye"></i>
+              <i class="bi bi-arrow-bar-up"></i>
               <h3><a href="">Back</a></h3>
             </div>
           </div>
           <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box">
-              <i class="bi bi-fullscreen-exit"></i>
+              <i class="bi bi-person-standing"></i>
               <h3><a href="">Shoulders</a></h3>
             </div>
           </div>
           <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="600">
             <div class="icon-box">
-              <i class="bi bi-card-list"></i>
+              <i class="bi bi-heart-pulse"></i>
               <h3><a href="">Chest</a></h3>
             </div>
           </div>
           <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="700">
             <div class="icon-box">
-              <i class="bi bi-gem"></i>
+              <i class="bi bi-shield-shaded"></i>
               <h3><a href="">Legs</a></h3>
             </div>
           </div>
