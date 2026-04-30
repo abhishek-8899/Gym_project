@@ -51,11 +51,11 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="/" class="active">Home<br></a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/gallery">Gallery</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/" class="{% block home_status %}{% endblock home_status %}">Home<br></a></li>
+          <li><a href="/about" class="{% block about_status %}{% endblock about_status %}">About</a></li>
+          <li><a href="/services"class="{% block services_status %}{% endblock services_status %}">Services</a></li>
+          <li><a href="/gallery"class="{% block gallery_status %}{% endblock gallery_status %}">Gallery</a></li>
+          <li><a href="/contact"class="{% block contact_status %}{% endblock contact_status %}">Contact</a></li>
           <li class="dropdown"><a href="#"><span>Membership</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="/enroll">Enroll</a></li>

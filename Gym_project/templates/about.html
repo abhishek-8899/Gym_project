@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Gym Management{% endblock %}
+{% block about_status %}active{% endblock about_status %}
+
+{% block head %}
+<section class="about-hero d-flex align-items-center justify-content-center text-center">
+    <div>
+        <h1 class="display-3 fw-bold">
+            ABOUT <span class="text-warning">US</span>
+        </h1>
+        <p class="lead mt-3 text-muted-white ">
+            Stronger Every Day • Better Every Step
+        </p>
+        <hr class="w-25 mx-auto mt-3" style="border: 2px solid #ffc107;">
+    </div>
+</section>
+
+<style>
+.about-hero {
+    height: 40vh;
+    background: none; /* clean look */
+    padding-top: 40px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5 mb-5">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5 pb-4 border-bottom">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h1 class="display-4 fw-bold text-uppercase mb-3">Elevate Your <span class="text-danger">Fitness</span></h1>
+            <p class="lead text-muted">
+                Welcome to our fitness center, where we are dedicated to helping you crush your goals. Whether you are a beginner taking your first steps or an experienced athlete pushing your limits, we have the tools, environment, and expertise you need.
+            </p>
+            <a href="{% url 'signup' %}" class="btn btn-danger btn-lg mt-3">Join Us Today</a>
+        </div>
+        <div class="col-lg-6">
+            <!-- Using a high-quality placeholder image from Unsplash -->
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" class="img-fluid rounded shadow-lg" alt="Gym Interior">
+        </div>
+    </div>
+
+    <!-- Mission & Vision Cards -->
+    <div class="row mb-5 pb-4 border-bottom">
+        <div class="col-md-6 mb-4 mb-md-0">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body p-4 text-center">
+                    <h3 class="card-title text-uppercase fw-bold mb-3">Our Mission</h3>
+                    <p class="card-text text-muted">
+                        To empower individuals of all fitness levels to transform their lives through accessible, high-quality fitness training and a highly supportive community environment.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body p-4 text-center">
+                    <h3 class="card-title text-uppercase fw-bold mb-3">Our Vision</h3>
+                    <p class="card-text text-muted">
+                        To be the premier fitness destination in Bareilly, fostering health, wellness, and absolute strength for a better, healthier tomorrow.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <div class="row text-center mt-4">
+        <div class="col-12 mb-5">
+            <h2 class="display-5 fw-bold text-uppercase">Why Choose Us?</h2>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <!-- SVG Icon for Weights -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-heptagon text-danger mb-3" viewBox="0 0 16 16">
+                  <path d="M7.779.052a.5.5 0 0 1 .442 0l6.015 2.97a.5.5 0 0 1 .267.34l1.485 6.676a.5.5 0 0 1-.11.439l-4.576 5.308a.5.5 0 0 1-.377.165H5.075a.5.5 0 0 1-.377-.165L.122 10.477a.5.5 0 0 1-.11-.44l1.485-6.676a.5.5 0 0 1 .267-.34L7.779.053zM6.92 1.48 2.012 3.9 1 9.066l3.784 4.385h6.432l3.784-4.385-1.012-5.166L9.08 1.48a1.5 1.5 0 0 0-1.16 0z"/>
+                </svg>
+                <h4 class="fw-bold">Modern Equipment</h4>
+                <p class="text-muted">Fully equipped with the latest machines, free weights, and cardio stations.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <!-- SVG Icon for People -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-people-fill text-danger mb-3" viewBox="0 0 16 16">
+                  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                </svg>
+                <h4 class="fw-bold">Expert Trainers</h4>
+                <p class="text-muted">Certified professionals to guide your form, diet, and motivate you every day.</p>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="p-3">
+                <!-- SVG Icon for Heart -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-heart-pulse-fill text-danger mb-3" viewBox="0 0 16 16">
+                  <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475Z"/>
+                  <path d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z"/>
+                </svg>
+                <h4 class="fw-bold">Great Community</h4>
+                <p class="text-muted">A welcoming, positive environment where everyone supports each other.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2,86 +2,88 @@
 {% block title %}
 Gallery
 {% endblock title %}
-
-{% block body %}
+{% block gallery_status %}active{% endblock gallery_status %}
+{% block head %}
+<section class="gallery-hero d-flex align-items-center justify-content-center text-center">
+    <div>
+        <h1 class="display-3 fw-bold">
+            OUR <span class="text-warning">GALLERY</span>
+        </h1>
+        <p class="lead mt-3 text-muted-white">
+            Explore Our Space • Feel The Energy • Join The Movement
+        </p>
+        <hr class="w-25 mx-auto mt-3" style="border: 2px solid #ffc107;">
+    </div>
+</section>
 
 <style>
-/* Background */
-body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-}
-
-/* Card */
-.gallery-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: 0.3s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-}
-
-.gallery-card:hover {
-    transform: translateY(-8px);
-}
-
-/* Image bigger */
-.gallery-img {
-    width: 100%;
-    height: 300px;   /* 🔥 bigger image */
-    object-fit: cover;
-}
-
-/* Content */
-.gallery-content {
-    padding: 15px;
-    color: white;
-}
-
-.gallery-title {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.gallery-time {
-    font-size: 14px;
-    color: #ccc;
-}
-
-/* Heading */
-h1 {
-    color: white;
-    text-shadow: 0px 0px 10px rgba(0,0,0,0.6);
+.gallery-hero {
+    height: 40vh;
+    background: none; /* clean no background */
+    padding-top: 40px;
 }
 </style>
+{% endblock %}
 
-<div class="container mt-4">
 
-    <h1 class="text-center mb-4">🏋️ Gym Gallery</h1>
+{% block body %}
+<!-- Add the hover transition CSS (if not already in your main CSS file) -->
+<style>
+    .transition-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    .hover-danger:hover {
+        color: #dc3545 !important;
+    }
+</style>
 
-    <div class="row">
 
+<!-- Main Gallery Section -->
+<div class="container mb-5 pb-5">
+    
+    <!-- Page Intro -->
+    <div class="text-center mb-5">
+        <br><br><br>
+       <p class="lead text-danger fw-bold fs-3 mx-auto">
+    Take a look inside our facility. See the equipment, the environment, and the community that makes our gym special.
+</p>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="row g-4">
         {% for img in images %}
-        <div class="col-md-6 col-lg-4 mb-4">  <!-- 🔥 better spacing -->
-
-            <div class="gallery-card">
-
-                <img src="{{ img.image.url }}" class="gallery-img" alt="gallery image">
-
-                <div class="gallery-content">
-                    <div class="gallery-title">{{ img.title }}</div>
-                    <div class="gallery-time">
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 transition-hover">
+                
+                <!-- Image -->
+                <img src="{{ img.image.url }}" class="card-img-top" alt="{{ img.title }}" style="height: 300px; object-fit: cover;">
+                
+                <!-- Content -->
+                <div class="card-body">
+                    <h5 class="card-title fw-bold mb-2">{{ img.title }}</h5>
+                    <p class="card-text text-muted small mb-0">
+                        <!-- Tiny calendar/time SVG icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-clock me-1 text-danger" viewBox="0 0 16 16">
+                          <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                        </svg>
                         {{ img.timestamp|date:"d M Y, h:i A" }}
-                    </div>
+                    </p>
                 </div>
 
             </div>
-
+        </div>
+        {% empty %}
+        <!-- Fallback if no images are in the database -->
+        <div class="col-12 text-center py-5">
+            <h4 class="text-muted">No images have been uploaded to the gallery yet.</h4>
         </div>
         {% endfor %}
-
     </div>
 
 </div>
-
 {% endblock body %}
