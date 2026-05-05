@@ -87,10 +87,6 @@ def enroll(request):
         'Trainers': Trainers,
     }
     if request.method == "POST":
-        # selected_plan_id = request.POST.get("member")
-        # membership = Membership.objects.get(id=selected_plan_id)
-        # price = membership.price
-        # plan_name = membership.plan
 
         fullname = request.POST.get("fullname")
         email = request.POST.get("email")
